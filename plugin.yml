@@ -1,13 +1,8 @@
-name: Fly
-main: Nerahikada\Fly\Main
-version: 2.0.0
+name: Commandnotice
+main: Lovetwice1012\Commandnotice\Main
+version: 1.0.0
 api: [3.0.0, 4.0.0]
 load: POSTWORLD
-author: ねらひかだ
-description: 飛べます！
-website: https://github.com/Nerahikada/Fly
-
-commands:
-  fly:
-    description: 飛行を切り替えます
-    usage: /fly
+author: lovetwice1012
+description: コマンドを誰かが使った時にコンソールに通知します。
+website: https://github.com/lovetwice1012/Commandnotice
