@@ -1,6 +1,6 @@
 <?php
 
-namespace Nerahikada\Fly;
+namespace Lovetwice1012\Commandnotice;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
@@ -8,33 +8,39 @@ use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
 use pocketmine\Player;
-
+use pocketmine\Server;
+use pocketmine\event\player\PlayerCommandPreprocessEvent;
+	
 class Main extends PluginBase implements Listener{
-
-	private $fly;
 
 	public function onEnable(){
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 	}
 
-	public function onJoin(PlayerJoinEvent $event){
-		$this->fly[$event->getPlayer()->getName()] = false;
-	}
+	public function onChat(PlayerCommandPreprocessEvent $event)
+    {
 
-	public function onCommand(CommandSender $sender, Command $command, string $label, array $args) : bool{
-		if(!$sender instanceof Player){
-			$sender->sendMessage("§cゲーム内で実行してください");
-			return true;
-		}
-
-		$bool = !$this->fly[$sender->getName()];
-		$this->fly[$sender->getName()] = $bool;
-
-		$sender->sendMessage("飛行が" . ($bool ? "有効" : "無効") . "になりました");
-
-		$sender->setAllowFlight($bool);
-		$sender->setFlying($bool);
-		return true;
-	}
+        $player = $event->getPlayer();
+        $user = $player->getName();
+        $m = $event->getMessage();
+        if (substr($m, 0, 1) == "/") {
+            $this->getLogger()->info("§a$user §fがコマンド:§6$m §fを使用しました。");
+            $players = Server::getInstance()->getOnlinePlayers();
+            foreach ($players as $player) {
+                if ($player->isOp()) {
+                    $player->sendMessage("§a$user §fがコマンド: §6$m §fを使用しました。");
+                }
+            }
+        }
+        if (substr($m, 0, 2) == "./") {
+            $this->getLogger()->info("§a$user §fがコマンド: §6$m §fを使用しました。"); //infoにめっせーじを送る
+            $players = Server::getInstance()->getOnlinePlayers();
+            foreach ($players as $player) {
+                if ($player->isOp()) {
+     $player->sendMessage("§a$user §fがコマンド: §6$m §fを使用しました。");
+                }
+            }
+        }
+    }
 
 }
