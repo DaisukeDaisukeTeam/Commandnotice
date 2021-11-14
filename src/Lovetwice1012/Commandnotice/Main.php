@@ -27,7 +27,7 @@ class Main extends PluginBase implements Listener{
             $this->getLogger()->info("§a$user §fがコマンド:§6$m §fを使用しました。");
             $players = Server::getInstance()->getOnlinePlayers();
             foreach ($players as $player) {
-                if ($this->getServer()->isOp($player)) {
+                if ($this->getServer()->isOp($player->getName())) {
                     $player->sendMessage("§a$user §fがコマンド: §6$m §fを使用しました。");
                 }
             }
@@ -36,7 +36,7 @@ class Main extends PluginBase implements Listener{
             $this->getLogger()->info("§a$user §fがコマンド: §6$m §fを使用しました。"); //infoにめっせーじを送る
             $players = Server::getInstance()->getOnlinePlayers();
             foreach ($players as $player) {
-                if ($this->getServer()->isOp($player)) {
+                if ($this->getServer()->isOp($player->getName())) {
      $player->sendMessage("§a$user §fがコマンド: §6$m §fを使用しました。");
                 }
             }
